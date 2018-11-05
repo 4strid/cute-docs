@@ -86,7 +86,6 @@ const maybeSrc = window.localStorage.getItem('saved')
 const editor = document.querySelector('.src pre code')
 editor.innerText = maybeSrc || src
 editor.addEventListener('input', compile)
-editor.addEventListener('ready', compile)
 editor.addEventListener('keydown', insertTab)
 editor.contentEditable = true
 
@@ -95,7 +94,7 @@ saveBtn.addEventListener('click', () => window.localStorage.setItem('saved', edi
 
 let app = null
 
-//compile({target: { innerText: src }})
+compile({target: { innerText: editor.innerText }})
 
 function insertTab (evt) {
 	console.log(evt)
