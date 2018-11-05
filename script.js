@@ -81,15 +81,21 @@ Cute.attach(
 )
 `
 
+const maybeSrc = window.localStorage.getItem('saved')
+
 const editor = document.querySelector('.src pre code')
-editor.innerText = src
+editor.innerText = maybeSrc || src
 editor.addEventListener('input', compile)
+editor.addEventListener('ready', compile)
 editor.addEventListener('keydown', insertTab)
 editor.contentEditable = true
 
+const saveBtn = document.querySelector('button')
+saveBtn.addEventListener('click', () => window.localStorage.setItem('saved', editor.innerText))
+
 let app = null
 
-compile({target: { innerText: src }})
+//compile({target: { innerText: src }})
 
 function insertTab (evt) {
 	console.log(evt)
